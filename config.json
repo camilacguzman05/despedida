@@ -1,0 +1,25 @@
+{
+  "base_url": "https://TU-USUARIO.github.io/despedida-interactiva/",
+  "groups": [
+    {
+      "slug": "clan-tulipan",
+      "name": "Clan Tulipán"
+    },
+    {
+      "slug": "clan-highlands",
+      "name": "Clan Highlands"
+    },
+    {
+      "slug": "clan-boiler",
+      "name": "Clan Boiler Room"
+    },
+    {
+      "slug": "clan-erasmus",
+      "name": "Clan Erasmus"
+    },
+    {
+      "slug": "clan-whisky",
+      "name": "Clan Whisky en las Ruedas"
+    }
+  ]
+}
