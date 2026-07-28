@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Franja de Recocha · Grupo 5</title><style>
+:root{--bg:#101120;--card:#1a1d32;--text:#fffaf2;--muted:#b9bfd3;--accent:#ff9f43;--accent2:#8e7dff}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 90% 5%,#8e7dff33,transparent 28%),radial-gradient(circle at 10% 0%,#ff9f432b,transparent 30%),var(--bg);color:var(--text)}
+main{max-width:720px;margin:auto;padding:20px 18px 70px}
+.top{position:sticky;top:0;padding:12px 0;background:linear-gradient(var(--bg) 70%,transparent);z-index:3}
+.track{height:9px;background:#ffffff14;border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.3s}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:7px}
+.screen{display:none}.screen.active{display:block}
+.hero{padding:32px 0 18px}
+.kicker{display:inline-block;padding:8px 12px;border-radius:999px;background:#ffffff10;border:1px solid #ffffff1c;font-size:14px}
+h1{font-size:clamp(42px,12vw,70px);line-height:.92;margin:18px 0 12px}
+h2{font-size:32px;line-height:1.05}
+.lead,.muted{color:var(--muted)}.lead{font-size:19px}
+.group,.card{background:linear-gradient(145deg,#272a49,#17192e);border:1px solid #ffffff1c;border-radius:24px;padding:22px;margin:16px 0}
+.card{background:var(--card)}
+.num{font-size:86px;font-weight:900;color:var(--accent);line-height:.9}
+input,textarea{width:100%;background:#0f1122;color:white;border:1px solid #ffffff22;border-radius:14px;padding:14px;font:inherit;margin-top:8px}
+textarea{min-height:90px}
+label{display:block;font-weight:700;margin-top:15px}
+.actions{display:flex;gap:10px;margin-top:24px}
+button,a.btn{border:0;border-radius:16px;padding:15px 18px;font:inherit;font-weight:800;text-align:center;text-decoration:none;cursor:pointer}
+.primary{background:var(--accent);color:#201407;flex:1}
+.secondary{background:#ffffff0d;color:white;border:1px solid #ffffff20}
+.notice{padding:15px 17px;border-radius:16px;background:#ff9f4315;border-left:4px solid var(--accent);color:#e9e1d8}
+.song{display:flex;gap:14px;align-items:center;padding:18px;background:#20233c;border-radius:18px}
+.footer{text-align:center;color:#7f859c;font-size:12px;margin-top:35px}
+.symbol-row{display:flex;gap:14px;align-items:flex-start}.symbol-emoji{font-size:38px;line-height:1}
+</style></head>
+<body><main>
+<div class="top"><div class="track"><div class="bar" id="bar"></div></div><div class="meta"><span>Franja de Recocha</span><span id="stepText"></span></div></div>
+
+<section class="screen active">
+<div class="hero"><span class="kicker">🎟️ Acceso confirmado</span><h1>Bienvenidxs a la Franja de Recocha</h1><p class="lead">Durante esta actividad deberán crear, improvisar, vestir, recordar, traducir y competir.</p></div>
+<div class="group"><div class="muted">Su grupo asignado es</div><div class="num">#5</div><p>Participen activamente para ganar el mejor premio de la noche.</p></div>
+<div class="notice">Avancen únicamente cuando Mila o Juano anuncien la siguiente actividad.</div>
+<div class="actions"><button class="primary" onclick="next()">Comenzar</button></div>
+</section>
+
+<section class="screen">
+<span class="kicker">01 · Identidad</span><h2>Construyan la identidad de su grupo</h2>
+<p class="lead">Elijan un nombre relacionado con los lugares a los que se van Mila y Juano.</p>
+<div class="card"><label>Nombre del grupo</label><input id="teamName" placeholder="Escriban aquí..." oninput="save()"></div>
+<div class="actions"><button class="secondary" onclick="prev()">Atrás</button><button class="primary" onclick="next()">Continuar</button></div>
+</section>
+
+<section class="screen">
+<span class="kicker">02 · Diseño</span><h2>Creen los símbolos de su grupo</h2>
+<div class="card"><div class="symbol-row"><div class="symbol-emoji">🏴 🇳🇱</div><div><h3 style="margin-top:0">Diseñen su tartán y su emblema neerlandés</h3><p class="muted">Ambos deben representar la personalidad del grupo. Usen las hojas, marcadores y colores disponibles.</p></div></div></div>
+<div class="actions"><button class="secondary" onclick="prev()">Atrás</button><button class="primary" onclick="next()">Diseños listos</button></div>
+</section>
+
+<section class="screen">
+<span class="kicker">03 · Himno</span><h2>Elijan una canción que los represente</h2>
+<div class="song"><div style="font-size:34px">🎵</div><div><strong>El himno oficial de su grupo</strong><div class="muted">Elijan una canción que refleje su personalidad.</div></div></div>
+<label>Nombre de la canción</label><input id="songName" placeholder="Escriban la canción..." oninput="save()">
+<label>Artista</label><input id="songArtist" placeholder="Escriban el artista..." oninput="save()">
+<label>Enlace de Spotify (opcional)</label><input id="spotifyLink" placeholder="Peguen aquí el enlace..." oninput="save()">
+<div class="actions"><button class="secondary" onclick="prev()">Atrás</button><button class="primary" onclick="next()">Continuar</button></div>
+</section>
+
+<section class="screen">
+<span class="kicker">04 · Outfit</span><h2>Preparen a su representante</h2>
+<div class="card"><div class="muted">Concepto asignado</div><h3 style="font-size:30px">XXX</h3><p>Un integrante del grupo debe vestirse de <strong>XXX</strong> y preparar una pasarela.</p></div>
+<label>Nombre del personaje</label><input id="characterName" placeholder="Escriban aquí..." oninput="save()">
+<div class="actions"><button class="secondary" onclick="prev()">Atrás</button><button class="primary" onclick="next()">Outfit terminado</button></div>
+</section>
+
+<section class="screen">
+<span class="kicker">05 · Trivia</span><h2>Pongan a prueba lo que saben</h2>
+<p class="lead">Respondan las preguntas que aparecerán en el videobeam para acumular puntos.</p>
+<div class="card"><h3 style="margin-top:0">Prepárense para participar</h3><p class="muted">Habrá preguntas, canciones, videos, traducciones y retos relacionados con Mila, Juano y muchas otras categorías.</p></div>
+<div class="actions"><button class="secondary" onclick="prev()">Atrás</button><button class="primary" onclick="next()">Trivia terminada</button></div>
+</section>
+
+<section class="screen">
+<span class="kicker">06 · Cóctel</span><h2>Alistemos el paladar para la fiesta que se viene con cócteles</h2>
+<div class="card"><div class="muted">Destilado e ingredientes asignados</div><h3 style="font-size:34px">Por definir</h3><p class="muted">Aquí aparecerán el destilado y los ingredientes asignados al Grupo 5.</p></div>
+<label>Nombre del cóctel</label><input id="cocktailName" placeholder="Escriban el nombre..." oninput="save()">
+<label>Historia o concepto</label><textarea id="cocktailStory" placeholder="¿Qué representa este cóctel?" oninput="save()"></textarea>
+<div class="actions"><button class="secondary" onclick="prev()">Atrás</button><button class="primary" onclick="finish()">Estoy listo para enfiestarme</button></div>
+</section>
+
+<section class="screen">
+<span class="kicker">🎉 Todo listo</span><h2>¡Que comience la fiesta!</h2>
+<div class="group"><div class="muted">Equipo</div><h3 id="finalName" style="font-size:32px">Grupo 5</h3><p>Ya tienen nombre, símbolos, canción, outfit, puntos y cóctel. Esperen el veredicto de Mila y Juano.</p></div>
+</section>
+
+<div class="footer">Grupo 5 · La Gran Despedida</div>
+</main>
+<script>
+const prefix='recocha_g5_';
+let current=Number(localStorage.getItem(prefix+'step')||0);
+const screens=[...document.querySelectorAll('.screen')];
+const fields=['teamName','songName','songArtist','spotifyLink','characterName','cocktailName','cocktailStory'];
+function show(x){current=Math.max(0,Math.min(x,screens.length-1));screens.forEach((s,i)=>s.classList.toggle('active',i===current));document.getElementById('bar').style.width=(current/(screens.length-1)*100)+'%';document.getElementById('stepText').textContent=current===screens.length-1?'Completado':'Paso '+(current+1)+' de '+(screens.length-1);localStorage.setItem(prefix+'step',current);restore();scrollTo(0,0)}
+function next(){show(current+1)} function prev(){show(current-1)}
+function save(){fields.forEach(id=>{const e=document.getElementById(id);if(e)localStorage.setItem(prefix+id,e.value)})}
+function restore(){fields.forEach(id=>{const e=document.getElementById(id);if(e)e.value=localStorage.getItem(prefix+id)||''});const f=document.getElementById('finalName');if(f)f.textContent=localStorage.getItem(prefix+'teamName')||'Grupo 5'}
+function finish(){save();show(screens.length-1)} show(current);
+</script></body></html>
